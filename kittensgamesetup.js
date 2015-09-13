@@ -107,7 +107,7 @@ var nextAff = function (building) {
 
 //var scienceGoals = [];
 
-var trade = function() {
+var trade = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/ckai0yc
 	var races = gamePage.diplomacyTab.racePanels;
 	
 	var zebras = false;
@@ -134,7 +134,7 @@ var trade = function() {
 	
 }
 
-autoPray = setInterval(function() {
+autoPray = setInterval(function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
     var origTab = gamePage.activeTabId;
     var faith = gamePage.resPool.get('faith');
@@ -146,9 +146,9 @@ autoPray = setInterval(function() {
     }
 }, 10 * 1000);
 
-starClick = setInterval(function() { $("#gameLog").find("input").click(); }, 2 * 1000);
+starClick = setInterval(function() { $("#gameLog").find("input").click(); }, 2 * 1000); //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 
-var craftCatnip = function() {
+var craftCatnip = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
     var catnip = gamePage.resPool.get('catnip');
     var calendar = gamePage.calendar;
@@ -161,7 +161,7 @@ var craftCatnip = function() {
     gamePage.craft('wood', catnip.maxValue * 0.01 / 50);
 }
 
-var craft = function() {
+var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
     var resources = [
         ["wood",     "beam" ],
@@ -197,7 +197,7 @@ var craft = function() {
     }
 }
 
-var hunt = function() {
+var hunt = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
     var catpower = gamePage.resPool.get('manpower');
     
@@ -206,7 +206,7 @@ var hunt = function() {
 	//}
 }
 
-var books = function () {
+var books = function () { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
 	var catpower = gamePage.resPool.get('manpower');
 	var culture = gamePage.resPool.get('culture');
@@ -877,7 +877,7 @@ var build = function () {
 						craftUp(cost[i].name);	
 				}
 			}	
-			var btnstr = "";
+			var btnstr = ""; //https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
 			btnstr = ".btnContent:contains('" + availableUpgrades[i].title + "')";
 			$(btnstr).click();
 		}
