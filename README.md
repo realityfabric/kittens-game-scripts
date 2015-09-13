@@ -7,3 +7,5 @@ Link to scripts used:
 - https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 - //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/ckai0yc
 - https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
+
+I was going to make these scripts neater, and I had plans to make the automation more complete from start to finish, but, as I said, I got bored.
