@@ -713,51 +713,6 @@ var balance = function() {
 		
 		resources[i].value = res.value;
 	}
-	
-	/*var mechanization = [{name: 'science', val: 115000}, {name: 'blueprint', val: 45}],
-		combustion = [{name: 'science', val: 115000}, {name: 'blueprint', val: 45}];
-	*/	
-	
-	
-		//particle physics
-		/*
-		convertCost({name: 'science', val: 185000});
-		convertCost({name: 'blueprint', val: 185});
-		convertCost({name: 'compedium', val: 5000});
-		*/
-	/*
-		//alloy warehouses
-		convertCost({name: 'science', val: 90000}); 
-		convertCost({name: 'titanium', val: 750});
-		convertCost({name: 'alloy', val: 50});
-		//barges
-		convertCost({name: 'science', val: 100000});
-		convertCost({name: 'titanium', val: 1500});
-		convertCost({name: 'blueprint', val: 30});
-		//concrete huts
-		convertCost({name: 'science', val: 125000});
-		convertCost({name: 'concrate', val: 45});
-		convertCost({name: 'titanium', val: 3000});
-		//refrigeration
-		convertCost({name: 'science', val: 125000});
-		convertCost({name: 'titanium', val: 2500});
-		convertCost({name: 'blueprint', val: 15});
-		//mining drill
-		convertCost({name: 'science', val: 100000});
-		convertCost({name: 'steel', val: 750});
-		convertCost({name: 'titanium', val: 1750});
-		//electrolytic smelting
-		convertCost({name: 'science', val: 100000});
-		convertCost({name: 'titanium', val: 2000});
-		//Oil Refinery
-		convertCost({name: 'titanium', val: 1250});
-		convertCost({name: 'gear', val: 500});
-		convertCost({name: 'science', val: 125000});
-		//Fuel Injectors
-		convertCost({name: 'gear', val: 250});
-		convertCost({name: 'oil', val: 20000});
-		convertCost({name: 'science', val: 100000});
-		*/
 		
 		//feeding the populace
 		var catnipDemand = gamePage.resPool.get('catnip').maxValue * .95;
