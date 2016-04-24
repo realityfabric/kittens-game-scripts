@@ -1,3 +1,5 @@
+var debug = false;
+
 var buildpriority = undefined;
 
 var parchmentMin = 1000;
@@ -53,7 +55,7 @@ var tiers = tiers_base;
 
 var checkTier = function () {
 	var affordable = function (building) {
-		//console.log("Checking affordability of " + building);
+		if (debug) console.log("Checking affordability of " + building);
 		var cost = gamePage.bld.getPrices(building);
 		var flag = true;
 		
@@ -64,8 +66,8 @@ var checkTier = function () {
 			}
 		}
 		
-		if (flag) {
-			//console.log("Affordable: " + building);
+		if (debug) {
+			if (flag) console.log("Affordable: " + building);
 		}
 
 		return flag;
@@ -333,13 +335,15 @@ var balance = function() {
 		var job = gamePage.village.jobs[i];
 		
 		jobs[i].unlocked = job.unlocked;
-		//console.log(jobs[i].name + " unlocked == " + jobs[i].unlocked);
+		
+		if (debug) console.log(jobs[i].name + " unlocked == " + jobs[i].unlocked);
 		
 		/*if (jobs[i].name == 'farmer' && jobs[i].unlocked) {
 			freeKittens--;
-			//console.log("Reducing freeKittens to " + freeKittens);
+			
+			if (debug) console.log("Reducing freeKittens to " + freeKittens);
 			jobs[i].value++;
-			//console.log(jobs[i].name + " workers: " + jobs[i].value);
+			if (debug) console.log(jobs[i].name + " workers: " + jobs[i].value);
 		}*/ // farmers>0
 	}
 	
@@ -360,7 +364,8 @@ var balance = function() {
 	var setPerTick = function () {
 		for (var i = 0; i < resources.length; i++) {
 			resources[i].perTick = gamePage.resPool.get(resources[i].name).perTickUI;
-			//console.log(resources[i].name + " perTick: " + resources[i].perTick);
+			
+			if (debug) console.log(resources[i].name + " perTick: " + resources[i].perTick);
 		}
 	}
 	
@@ -378,7 +383,8 @@ var balance = function() {
 
 	
 	var affordable = function (building) {
-		//console.log("Checking affordability of " + building);
+		if (debug) console.log("Checking affordability of " + building);
+		
 		var cost = gamePage.bld.getPrices(building);
 		var flag = true;
 		
@@ -389,8 +395,8 @@ var balance = function() {
 			}
 		}
 		
-		if (flag) {
-			//console.log("Affordable: " + building);
+		if (debug) {
+			if (flag) console.log("Affordable: " + building);
 		}
 
 		return flag;
@@ -512,8 +518,10 @@ var balance = function() {
 	}
 	
 	var tickValue = function (resource) { //converts per tick to a value between 0 and 1, the smaller the perTickValue the larger the tickValue result
-		//console.log("Tick Value");
-		//console.log (resource);
+		if (debug) {
+			console.log("Tick Value");
+			console.log (resource);
+		}
 		if (resource.need - resource.value > 0 
 		&& gamePage.resPool.get(resource.name).maxValue != 0
 		&& resource.value < gamePage.resPool.get(resource.name).maxValue) {
@@ -525,14 +533,16 @@ var balance = function() {
 	}
 	
 	var totalTickValue = function (allocation) {
-		//console.log("Total Tick Value");
+		if (debug) console.log("Total Tick Value");
+		
 		var total = 0;
 		
 		if (allocation == 'jobs') {
 			for (var i = 0; i < jobs.length; i++) {
 				if (jobs[i].unlocked) {
 					for (var j = 0; j < jobs[i].resources.length; j++) {
-						//console.log ('totalTickValue ' + jobs[i].resources[j]);
+						if (debug) console.log ('totalTickValue ' + jobs[i].resources[j]);
+						
 						total += tickValue(getResource(jobs[i].resources[j]));
 					}
 				}
@@ -548,12 +558,12 @@ var balance = function() {
 			}
 		}
 		
-		//console.log("Total: " + total);
+		if (debug) console.log("Total: " + total);
 		return total;
 	}
 	
 	var assignJobs = function () {
-		//console.log("Assigning jobs");
+		if (debug) console.log("Assigning jobs");
 		gamePage.village.clearJobs();
 		for (var i = 0; i < jobs.length; i++) {
 			for (var j = 0; j < jobs[i].value; j++) {
@@ -693,7 +703,8 @@ var balance = function() {
 		freeKittens-=5;
 		assignJobs();
 		setPerTick();
-		//console.log(jobs[i].name + " // " + freeKittens + " // " + getResource(jobs[i].resource).perTick);
+		
+		if (debug) console.log(jobs[i].name + " // " + freeKittens + " // " + getResource(jobs[i].resource).perTick);
 	}
 	
 	for (var i = 0; i < jobs.length; i++) {
@@ -730,7 +741,9 @@ var balance = function() {
 			}
 			else {
 				automation[i].on += Math.floor(automation[i].value * tickValue(getResource(automation[i].resources[j])) / (totalTickValue('automation') + tickValue(getResource('minerals'))));
-				//console.log (automation[i].on + " / " + automation[i].value);
+				
+				if (debug) console.log (automation[i].on + " / " + automation[i].value);
+				
 				if (automation[i].on > automation[i].value) {
 					automation[i].on = automation[i].value;
 				}
@@ -738,8 +751,11 @@ var balance = function() {
 		}
 	}
 	
-	//console.log(jobs[0].name + ": " + jobs[0].value + " | " + jobs[1].name + ": " + jobs[1].value + " | " + jobs[2].name + ": " + jobs[2].value + " | " + jobs[3].name + ": " + jobs[3].value + " | " + jobs[4].name + ": " + jobs[4].value + " | " + jobs[5].name + ": " + jobs[5].value + " | " + jobs[6].name + ": " + jobs[6].value);
-	//console.log(automation[0].name + ": " + automation[0].on + "/" + automation[0].value + " | " + automation[1].name + ": " + automation[1].on + "/" + automation[1].value);
+	if (debug) {
+		console.log(jobs[0].name + ": " + jobs[0].value + " | " + jobs[1].name + ": " + jobs[1].value + " | " + jobs[2].name + ": " + jobs[2].value + " | " + jobs[3].name + ": " + jobs[3].value + " | " + jobs[4].name + ": " + jobs[4].value + " | " + jobs[5].name + ": " + jobs[5].value + " | " + jobs[6].name + ": " + jobs[6].value);
+		console.log(automation[0].name + ": " + automation[0].on + "/" + automation[0].value + " | " + automation[1].name + ": " + automation[1].on + "/" + automation[1].value);
+	}
+	
 	assignJobs();
 	setAutomation();
 	
@@ -1036,7 +1052,7 @@ var aff = function (building, num) {
             flag = false;
         }
         
-        //console.log (flag + " / " + priceRatio + " / " + gamePage.resPool.get(cost[i].name).maxValue + " / " + cost[i].val * Math.pow(priceRatio, num));
+        if (debug) console.log (flag + " / " + priceRatio + " / " + gamePage.resPool.get(cost[i].name).maxValue + " / " + cost[i].val * Math.pow(priceRatio, num));
     }
 
 	
