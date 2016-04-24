@@ -41,10 +41,10 @@ var tiers_base = [
 	['field','mine','lumberMill','smelter','tradepost'], //buildings which increase production efficiency but that don’t require crafted materials
 	['logHouse','library','academy','barn','hut'], //buildings which increase storage capacity but that don’t require crafted materials
 	['workshop'], //buildings which increase craft efficiency but that don’t require crafted materials
-	//['amphitheatre','accelerator','chapel'], //buildings which increase production efficiency that do require crafted materials, but that have at least one uncrafted material cost
-	//['pasture'], //buildings which produce energy that don't require crafts
-	//['aqueduct'], //buildings which produce energy that do require crafts
-	//['factory', 'biolab'], //buildings which increase craft efficiency that do require crafted materials, but that have at least one uncrafted material cost
+	['amphitheatre','accelerator','chapel'], //buildings which increase production efficiency that do require crafted materials, but that have at least one uncrafted material cost
+	['pasture'], //buildings which produce energy that don't require crafts
+	['aqueduct'], //buildings which produce energy that do require crafts
+	['factory', 'biolab'], //buildings which increase craft efficiency that do require crafted materials, but that have at least one uncrafted material cost
 	['observatory', 'temple'], //buildings which increase storage capacity which do require crafted materials, but that have at least one uncrafted material cost
 	['harbor','warehouse',]
 ];
@@ -165,6 +165,9 @@ var craftCatnip = function() { //https://www.reddit.com/r/kittensgame/comments/2
 
 var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
+	
+	if (debug) console.log ("craft()");
+	
     var resources = [
         ["wood",     "beam" ],
         ["minerals", "slab" ],
@@ -174,6 +177,8 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
     ];
     
     var affordable = function (craft) {
+		if (debug) console.log ("Checking affordability of " + craft);
+		
 		var cost = gamePage.workshop.getCraft(craft).prices;
 		var flag = true;
 		
@@ -183,6 +188,8 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
 			&& cost[i].val > resource.maxValue)
 			|| cost[i].val > resource.value) {
 				flag = false;
+				
+				if (debug) console.log ("Craft is not affordable due to " + cost[i].name);
 			}
 		}
 
@@ -195,7 +202,11 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
          && gamePage.workshop.getCraft(resources[i][1]).unlocked
          && affordable(resources[i][1])) {
             gamePage.craft(resources[i][1], 1);
-        }
+            
+            if (debug) console.log ("Crafting 1 " + resources[i][1]);
+        } else {
+			if (debug) console.log ("Could not craft " + resources[i][1]);
+		}
     }
 }
 
