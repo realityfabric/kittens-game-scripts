@@ -1,4 +1,4 @@
-var debug = false; // set to true to enable console logs
+var debug_on = false; // set to true to enable console logs
 
 var buildpriority = undefined;
 
@@ -55,7 +55,7 @@ var tiers = tiers_base;
 
 var checkTier = function () {
 	var affordable = function (building) {
-		if (debug) console.log("Checking affordability of " + building);
+		if (debug_on) console.log("Checking affordability of " + building);
 		var cost = gamePage.bld.getPrices(building);
 		var flag = true;
 		
@@ -66,7 +66,7 @@ var checkTier = function () {
 			}
 		}
 		
-		if (debug) {
+		if (debug_on) {
 			if (flag) console.log("Affordable: " + building);
 		}
 
@@ -166,7 +166,7 @@ var craftCatnip = function() { //https://www.reddit.com/r/kittensgame/comments/2
 var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
 	
-	if (debug) console.log ("craft()");
+	if (debug_on) console.log ("craft()");
 	
     var resources = [
         ["wood",     "beam" ],
@@ -177,7 +177,7 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
     ];
     
     var affordable = function (craft) {
-		if (debug) console.log ("Checking affordability of " + craft);
+		if (debug_on) console.log ("Checking affordability of " + craft);
 		
 		var cost = gamePage.workshop.getCraft(craft).prices;
 		var flag = true;
@@ -189,7 +189,7 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
 			|| cost[i].val > resource.value) {
 				flag = false;
 				
-				if (debug) console.log ("Craft is not affordable due to " + cost[i].name);
+				if (debug_on) console.log ("Craft is not affordable due to " + cost[i].name);
 			}
 		}
 
@@ -203,9 +203,9 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
          && affordable(resources[i][1])) {
             gamePage.craft(resources[i][1], 1);
             
-            if (debug) console.log ("Crafting 1 " + resources[i][1]);
+            if (debug_on) console.log ("Crafting 1 " + resources[i][1]);
         } else {
-			if (debug) console.log ("Could not craft " + resources[i][1]);
+			if (debug_on) console.log ("Could not craft " + resources[i][1]);
 		}
     }
 }
@@ -347,14 +347,14 @@ var balance = function() {
 		
 		jobs[i].unlocked = job.unlocked;
 		
-		if (debug) console.log(jobs[i].name + " unlocked == " + jobs[i].unlocked);
+		if (debug_on) console.log(jobs[i].name + " unlocked == " + jobs[i].unlocked);
 		
 		/*if (jobs[i].name == 'farmer' && jobs[i].unlocked) {
 			freeKittens--;
 			
-			if (debug) console.log("Reducing freeKittens to " + freeKittens);
+			if (debug_on) console.log("Reducing freeKittens to " + freeKittens);
 			jobs[i].value++;
-			if (debug) console.log(jobs[i].name + " workers: " + jobs[i].value);
+			if (debug_on) console.log(jobs[i].name + " workers: " + jobs[i].value);
 		}*/ // farmers>0
 	}
 	
@@ -376,7 +376,7 @@ var balance = function() {
 		for (var i = 0; i < resources.length; i++) {
 			resources[i].perTick = gamePage.resPool.get(resources[i].name).perTickUI;
 			
-			if (debug) console.log(resources[i].name + " perTick: " + resources[i].perTick);
+			if (debug_on) console.log(resources[i].name + " perTick: " + resources[i].perTick);
 		}
 	}
 	
@@ -394,7 +394,7 @@ var balance = function() {
 
 	
 	var affordable = function (building) {
-		if (debug) console.log("Checking affordability of " + building);
+		if (debug_on) console.log("Checking affordability of " + building);
 		
 		var cost = gamePage.bld.getPrices(building);
 		var flag = true;
@@ -406,7 +406,7 @@ var balance = function() {
 			}
 		}
 		
-		if (debug) {
+		if (debug_on) {
 			if (flag) console.log("Affordable: " + building);
 		}
 
@@ -529,7 +529,7 @@ var balance = function() {
 	}
 	
 	var tickValue = function (resource) { //converts per tick to a value between 0 and 1, the smaller the perTickValue the larger the tickValue result
-		if (debug) {
+		if (debug_on) {
 			console.log("Tick Value");
 			console.log (resource);
 		}
@@ -544,7 +544,7 @@ var balance = function() {
 	}
 	
 	var totalTickValue = function (allocation) {
-		if (debug) console.log("Total Tick Value");
+		if (debug_on) console.log("Total Tick Value");
 		
 		var total = 0;
 		
@@ -552,7 +552,7 @@ var balance = function() {
 			for (var i = 0; i < jobs.length; i++) {
 				if (jobs[i].unlocked) {
 					for (var j = 0; j < jobs[i].resources.length; j++) {
-						if (debug) console.log ('totalTickValue ' + jobs[i].resources[j]);
+						if (debug_on) console.log ('totalTickValue ' + jobs[i].resources[j]);
 						
 						total += tickValue(getResource(jobs[i].resources[j]));
 					}
@@ -569,12 +569,12 @@ var balance = function() {
 			}
 		}
 		
-		if (debug) console.log("Total: " + total);
+		if (debug_on) console.log("Total: " + total);
 		return total;
 	}
 	
 	var assignJobs = function () {
-		if (debug) console.log("Assigning jobs");
+		if (debug_on) console.log("Assigning jobs");
 		gamePage.village.clearJobs();
 		for (var i = 0; i < jobs.length; i++) {
 			for (var j = 0; j < jobs[i].value; j++) {
@@ -715,7 +715,7 @@ var balance = function() {
 		assignJobs();
 		setPerTick();
 		
-		if (debug) console.log(jobs[i].name + " // " + freeKittens + " // " + getResource(jobs[i].resource).perTick);
+		if (debug_on) console.log(jobs[i].name + " // " + freeKittens + " // " + getResource(jobs[i].resource).perTick);
 	}
 	
 	for (var i = 0; i < jobs.length; i++) {
@@ -753,7 +753,7 @@ var balance = function() {
 			else {
 				automation[i].on += Math.floor(automation[i].value * tickValue(getResource(automation[i].resources[j])) / (totalTickValue('automation') + tickValue(getResource('minerals'))));
 				
-				if (debug) console.log (automation[i].on + " / " + automation[i].value);
+				if (debug_on) console.log (automation[i].on + " / " + automation[i].value);
 				
 				if (automation[i].on > automation[i].value) {
 					automation[i].on = automation[i].value;
@@ -762,7 +762,7 @@ var balance = function() {
 		}
 	}
 	
-	if (debug) {
+	if (debug_on) {
 		console.log(jobs[0].name + ": " + jobs[0].value + " | " + jobs[1].name + ": " + jobs[1].value + " | " + jobs[2].name + ": " + jobs[2].value + " | " + jobs[3].name + ": " + jobs[3].value + " | " + jobs[4].name + ": " + jobs[4].value + " | " + jobs[5].name + ": " + jobs[5].value + " | " + jobs[6].name + ": " + jobs[6].value);
 		console.log(automation[0].name + ": " + automation[0].on + "/" + automation[0].value + " | " + automation[1].name + ": " + automation[1].on + "/" + automation[1].value);
 	}
@@ -1063,7 +1063,7 @@ var aff = function (building, num) {
             flag = false;
         }
         
-        if (debug) console.log (flag + " / " + priceRatio + " / " + gamePage.resPool.get(cost[i].name).maxValue + " / " + cost[i].val * Math.pow(priceRatio, num));
+        if (debug_on) console.log (flag + " / " + priceRatio + " / " + gamePage.resPool.get(cost[i].name).maxValue + " / " + cost[i].val * Math.pow(priceRatio, num));
     }
 
 	
