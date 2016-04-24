@@ -908,6 +908,7 @@ var build = function () {
 		for (var c_index = 0; c_index < cost.length; c_index++) {
 			if (cost[c_index].val > gamePage.resPool.get(cost[c_index].name).value) {
 				canBuy = false;
+				break;
 			}
 		}
 		
