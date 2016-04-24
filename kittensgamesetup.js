@@ -249,6 +249,63 @@ var books = function () { //https://www.reddit.com/r/kittensgame/comments/2eqlt5
 	}
 }
 
+var aff = function (building, num) {
+	var bld = gamePage.bld.get(building);
+	var value = bld.val + num;
+	var cost = gamePage.bld.getPrices(building);
+	var priceRatio;
+	
+	if (bld.stages != undefined) {
+		priceRatio = bld.stages[bld.stage].priceRatio;
+	} else {
+		priceRatio = bld.priceRatio;
+	}
+	
+	var flag = true;
+	
+	for (var i = 0; i < cost.length; i++) {
+        if (gamePage.resPool.get(cost[i].name).maxValue != 0
+        && gamePage.resPool.get(cost[i].name).maxValue < cost[i].val * Math.pow(priceRatio, num)) {
+            flag = false;
+        }
+        
+        if (debug_on) console.log (flag + " / " + priceRatio + " / " + gamePage.resPool.get(cost[i].name).maxValue + " / " + cost[i].val * Math.pow(priceRatio, num));
+    }
+
+	
+
+    return flag;
+}
+
+var numAffordable = function (building) {
+    var more = {num: 0, totalCost: [{}]};
+    var cost = gamePage.bld.getPrices(building);
+    var bld = gamePage.bld.get(building);
+    
+    if (bld.stages != undefined) {
+		priceRatio = bld.stages[bld.stage].priceRatio;
+	} else {
+		priceRatio = bld.priceRatio;
+	}
+    
+    more.totalCost = cost;
+    
+    for (var i = 0; i < 100; i++) {
+		if (aff(building, more.num)) {
+			if (i > 0) {
+				for (var j = 0; j < more.totalCost.length; j++) {
+					more.totalCost[j].val += cost[j].val * Math.pow(priceRatio, more.num);
+				}
+			}
+			more.num++;
+		} else {
+			return more;
+		}
+	}
+
+	return more;
+}
+
 var balance = function() {
 	if (gamePage.isPaused) { return;}
 	var kittens = gamePage.village.getKittens();
@@ -1042,63 +1099,6 @@ autoMax = setInterval(function() {
 	maxOil();
 	maxIron();
 }, timer / 2);
-
-var aff = function (building, num) {
-	var bld = gamePage.bld.get(building);
-	var value = bld.val + num;
-	var cost = gamePage.bld.getPrices(building);
-	var priceRatio;
-	
-	if (bld.stages != undefined) {
-		priceRatio = bld.stages[bld.stage].priceRatio;
-	} else {
-		priceRatio = bld.priceRatio;
-	}
-	
-	var flag = true;
-	
-	for (var i = 0; i < cost.length; i++) {
-        if (gamePage.resPool.get(cost[i].name).maxValue != 0
-        && gamePage.resPool.get(cost[i].name).maxValue < cost[i].val * Math.pow(priceRatio, num)) {
-            flag = false;
-        }
-        
-        if (debug_on) console.log (flag + " / " + priceRatio + " / " + gamePage.resPool.get(cost[i].name).maxValue + " / " + cost[i].val * Math.pow(priceRatio, num));
-    }
-
-	
-
-    return flag;
-}
-
-var numAffordable = function (building) {
-    var more = {num: 0, totalCost: [{}]};
-    var cost = gamePage.bld.getPrices(building);
-    var bld = gamePage.bld.get(building);
-    
-    if (bld.stages != undefined) {
-		priceRatio = bld.stages[bld.stage].priceRatio;
-	} else {
-		priceRatio = bld.priceRatio;
-	}
-    
-    more.totalCost = cost;
-    
-    for (var i = 0; i < 100; i++) {
-		if (aff(building, more.num)) {
-			if (i > 0) {
-				for (var j = 0; j < more.totalCost.length; j++) {
-					more.totalCost[j].val += cost[j].val * Math.pow(priceRatio, more.num);
-				}
-			}
-			more.num++;
-		} else {
-			return more;
-		}
-	}
-
-	return more;
-}
 
 var ticksToGoal = function (resource, goal) {
     var res = gamePage.resPool.get(resource);
