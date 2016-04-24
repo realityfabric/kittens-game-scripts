@@ -214,9 +214,9 @@ var hunt = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a
 	if (gamePage.isPaused) { return; }
     var catpower = gamePage.resPool.get('manpower');
     
-    //if (catpower.value / catpower.maxValue > 0.95) {
+    if (catpower.value / catpower.maxValue > 0.95) {
         $("a:contains('Send hunters')").click();
-	//}
+	}
 }
 
 var books = function () { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
