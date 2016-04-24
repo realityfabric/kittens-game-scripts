@@ -470,117 +470,79 @@ var balance = function() {
 	}
 	
 	var convertCost = function (price) {
-		if (price.name == 'catnip') {
-			resources[0].need += price.val;
-		}
-		else if (price.name == 'wood') {
-			resources[1].need += price.val;
-		}
-		else if (price.name == 'minerals') {
-			resources[2].need += price.val;
-		}
-		else if (price.name == 'coal') {
-			resources[3].need += price.val;
-		}
-		else if (price.name == 'manpower') {
-			resources[4].need += price.val;
-		}
-		else if (price.name == 'furs') {
-			resources[4].need += price.val * (100 / (32.5 * huntRatio));
-		}
-		else if (price.name == 'science') {
-			resources[5].need += price.val;
-		}
-		else if (price.name == 'faith') {
-			resources[6].need += price.val;
-		}
-		else if (price.name == 'iron') {
-			//i'm not sure if this will work properly, but i added it to make sure that when iron is needed minerals are produced, since iron production consumes minerals... this should help to balance that out
-			resources[1].need += price.val * ((1/(1+Math.pow(Math.E,resources[1].perTick)))/(1/1+Math.pow(Math.E,resources[7].perTick)));
-			resources[2].need += price.val * ((1/(1+Math.pow(Math.E,resources[2].perTick)))/(1/1+Math.pow(Math.E,resources[7].perTick)));
-			resources[7].need += price.val;
-		}
-		else if (price.name == 'titanium') {
-			resources[2].need += price.val * ((1/(1+Math.pow(Math.E,resources[2].perTick)))/(1/1+Math.pow(Math.E,resources[8].perTick)));
-			resources[10].need += price.val * ((1/(1+Math.pow(Math.E,resources[10].perTick)))/(1/1+Math.pow(Math.E,resources[8].perTick)));
-			resources[3].need += price.val * ((1/(1+Math.pow(Math.E,resources[3].perTick)))/(1/1+Math.pow(Math.E,resources[8].perTick)));
-			resources[8].need += price.val;
-		} 
-		else if (price.name == 'gold') {
-			resources[9].need += price.val;
-		}
-		else if (price.name == 'oil') {
-			resources[10].need += price.val;
-		}
-		else if (price.name == 'culture' ||
-				 price.name == 'starchart' ||
-				 price.name == 'spice' ||
-				 price.name == 'unicorns' ||
-				 price.name == 'alicorn' ||
-				 price.name == 'necrocorn' ||
-				 price.name == 'tears' ||
-				 price.name == 'karma' ||
-				 price.name == 'paragon' ||
-				 price.name == 'kittens' ||
-				 price.name == 'zebras' ||
-				 price.name == 'antimatter' ||
-				 price.name == 'timeCrystal' ||
-				 price.name == 'sorrow' ||
-				 price.name == 'energy' ||
-				 price.name == 'unobtainium' ||
-				 price.name == 'uranium'){
-					 //do nothing
-		}
-		/*else if ((price.name != 'parchment' || price.name != 'manuscript' || price.name != 'compendium') && price.val < gamePage.resPool.get(price.name).value) {
-			//do nothing
-		}*/ // i don't remember why i put this here so i'm taking it out
-		/*else if (price.name == 'parchment') { //pretty sure this whole block of books breaks the tab, RIP
-			var resource = gamePage.resPool.get(price.name);
-			if (resource.craftable) {
-				var resCost = gamePage.workshop.getCraft(price.name).prices;
-				
-				for (var i = 0; i < resCost.length; i++) {
-					for (var j = 0; j < (Math.ceil(resCost[i].val / craftRatio) + parchmentMin); j++) {
-						convertCost(resCost[i]);
+		switch (price.name) {
+			case 'catnip':
+				resources[0].need += price.val;
+				break;
+			case 'wood':
+				resources[1].need += price.val;
+				break;
+			case 'minerals'
+				resources[2].need += price.val;
+				break;
+			case 'coal':
+				resources[3].need += price.val;
+				break;
+			case 'manpower':
+				resources[4].need += price.val;
+				break;
+			case 'furs':
+				resources[4].need += price.val * (100 / (32.5 * huntRatio));
+				break;
+			case 'science':
+				resources[5].need += price.val;
+				break;
+			case 'faith':
+				resources[6].need += price.val;
+				break;
+			case 'iron':
+				//i'm not sure if this will work properly, but i added it to make sure that when iron is needed minerals are produced, since iron production consumes minerals... this should help to balance that out
+				resources[1].need += price.val * ((1/(1+Math.pow(Math.E,resources[1].perTick)))/(1/1+Math.pow(Math.E,resources[7].perTick)));
+				resources[2].need += price.val * ((1/(1+Math.pow(Math.E,resources[2].perTick)))/(1/1+Math.pow(Math.E,resources[7].perTick)));
+				resources[7].need += price.val;
+				break;
+			case 'titanium':
+				resources[2].need += price.val * ((1/(1+Math.pow(Math.E,resources[2].perTick)))/(1/1+Math.pow(Math.E,resources[8].perTick)));
+				resources[10].need += price.val * ((1/(1+Math.pow(Math.E,resources[10].perTick)))/(1/1+Math.pow(Math.E,resources[8].perTick)));
+				resources[3].need += price.val * ((1/(1+Math.pow(Math.E,resources[3].perTick)))/(1/1+Math.pow(Math.E,resources[8].perTick)));
+				resources[8].need += price.val;
+				break;
+			case 'gold':
+				resources[9].need += price.val;
+				break;
+			case 'oil':
+				resources[10].need += price.val;
+				break;
+			case 'culture':
+			case 'starchart':
+			case 'spice':
+			case 'unicorns':
+			case 'alicorn':
+			case 'necrocorn':
+			case 'tears':
+			case 'karma':
+			case 'paragon':
+			case 'kittens':
+			case 'zebras':
+			case 'antimatter':
+			case 'timeCrystal':
+			case 'sorrow':
+			case 'energy':
+			case 'unobtainium':
+			case 'uranium':
+				break; //do nothing
+			default:
+				var resource = gamePage.resPool.get(price.name);
+				if (resource.craftable) {
+					var resCost = gamePage.workshop.getCraft(price.name).prices;
+					
+					for (var i = 0; i < resCost.length; i++) {
+						for (var j = 0; j < Math.ceil(resCost[i].val / craftRatio); j++) {
+							convertCost(resCost[i]);
+						}
 					}
 				}
-			}
-		}
-		else if (price.name == 'manuscript') {
-			var resource = gamePage.resPool.get(price.name);
-			if (resource.craftable) {
-				var resCost = gamePage.workshop.getCraft(price.name).prices;
-				
-				for (var i = 0; i < resCost.length; i++) {
-					for (var j = 0; j < (Math.ceil(resCost[i].val / craftRatio) + manuscriptMin); j++) {
-						convertCost(resCost[i]);
-					}
-				}
-			}
-		}
-		else if (price.name == 'compedium') {
-			var resource = gamePage.resPool.get(price.name);
-			if (resource.craftable) {
-				var resCost = gamePage.workshop.getCraft(price.name).prices;
-				
-				for (var i = 0; i < resCost.length; i++) {
-					for (var j = 0; j < (Math.ceil(resCost[i].val / craftRatio) + compediumMin); j++) {
-						convertCost(resCost[i]);
-					}
-				}
-			}
-		}*/
-		else {
-			var resource = gamePage.resPool.get(price.name);
-			if (resource.craftable) {
-				var resCost = gamePage.workshop.getCraft(price.name).prices;
-				
-				for (var i = 0; i < resCost.length; i++) {
-					for (var j = 0; j < Math.ceil(resCost[i].val / craftRatio); j++) {
-						convertCost(resCost[i]);
-					}
-				}
-			}
+				break;
 		}
 	}
 	
