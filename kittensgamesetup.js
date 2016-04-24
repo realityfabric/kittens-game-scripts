@@ -309,6 +309,19 @@ var numAffordable = function (building) {
 var balance = function() {
 	if (gamePage.isPaused) { return;}
 	
+	var catnip = gamePage.resPool.get('catnip');
+	var wood = gamePage.resPool.get('wood');
+	var minerals = gamePage.resPool.get('minerals');
+	var coal = gamePage.resPool.get('coal');
+	var catpower = gamePage.resPool.get('manpower');
+	var science = gamePage.resPool.get('science');
+	var faith = gamePage.resPool.get('faith');
+	var iron = gamePage.resPool.get('iron');
+	var titanium = gamePage.resPool.get('titanium');
+	var gold = gamePage.resPool.get('gold');
+	var oil = gamePage.resPool.get('oil');
+	var ivory = gamePage.resPool.get('ivory');
+	
 	var kittens = gamePage.village.getKittens();
 	var freeKittens = kittens; //later in the function this will be modified
 	var craftRatio = 1 + gamePage.bld.effectsCached.craftRatio;
