@@ -477,7 +477,7 @@ var balance = function() {
 			case 'wood':
 				resources[1].need += price.val;
 				break;
-			case 'minerals'
+			case 'minerals':
 				resources[2].need += price.val;
 				break;
 			case 'coal':
