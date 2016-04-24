@@ -923,8 +923,8 @@ var build = function () {
 						craftUp(cost[i].name);	
 				}
 			}	
-			var btnstr = ""; //https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
-			btnstr = ".btnContent:contains('" + availableUpgrades[i].title + "')";
+			
+			var btnstr = ".btnContent:contains('" + availableUpgrades[i].title + "')"; //https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
 			$(btnstr).click();
 		}
 	}
