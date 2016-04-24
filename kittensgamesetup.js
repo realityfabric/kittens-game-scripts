@@ -1,4 +1,4 @@
-var debug = false;
+var debug = false; // set to true to enable console logs
 
 var buildpriority = undefined;
 
