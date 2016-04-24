@@ -458,6 +458,7 @@ var balance = function() {
 			var resource = gamePage.resPool.get(cost[i].name);
 			if (resource.maxValue != 0 && cost[i].val > resource.maxValue) {
 				flag = false;
+				break;
 			}
 		}
 		
