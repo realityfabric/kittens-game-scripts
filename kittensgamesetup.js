@@ -386,18 +386,18 @@ var balance = function() {
 	}
 	
 	var resources = [
-		{name: 'catnip', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'wood', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'minerals', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'coal', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'manpower', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'science', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'faith', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'iron', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'titanium', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'gold', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'oil', value: 0, need: 0, perTick: 0, gatherable: false},
-		{name: 'ivory', value: 0, need: 0, perTick: 0, gatherable: false}
+		{name: 'catnip', value: catnip.value, need: 0, perTick: catnip.perTickUI, gatherable: jobs[1].unlocked},
+		{name: 'wood', value: wood.value, need: 0, perTick: wood.perTickUI, gatherable: jobs[0].unlocked},
+		{name: 'minerals', value: minerals.value, need: 0, perTick: minerals.perTickUI, gatherable: jobs[4].unlocked},
+		{name: 'coal', value: coal.value, need: 0, perTick: coal.perTickUI, gatherable: jobs[6].unlocked},
+		{name: 'manpower', value: catpower.value, need: 0, perTick: catpower.perTickUI, gatherable: jobs[3].unlocked},
+		{name: 'science', value: science.value, need: 0, perTick: science.perTickUI, gatherable: jobs[2].unlocked},
+		{name: 'faith', value: faith.value, need: 0, perTick: faith.perTickUI, gatherable: jobs[2].unlocked},
+		{name: 'iron', value: iron.value, need: 0, perTick: iron.perTickUI, gatherable: false},
+		{name: 'titanium', value: titanium.value, need: 0, perTick: titanium.perTickUI, gatherable: false},
+		{name: 'gold', value: gold.value, need: 0, perTick: gold.perTickUI, gatherable: false},
+		{name: 'oil', value: oil.value, need: 0, perTick: oil.perTickUI, gatherable: false},
+		{name: 'ivory', value: ivory.value, need: 0, perTick: ivory.perTickUI, gatherable: false}
 	];
 	
 	var getResource = function (resourceName) {
@@ -446,18 +446,7 @@ var balance = function() {
 		}
 	}
 	
-	setPerTick();
-	
-	resources[0].gatherable = jobs[1].unlocked;
-	resources[1].gatherable = jobs[0].unlocked;
-	resources[2].gatherable = jobs[4].unlocked;
-	resources[3].gatherable = jobs[6].unlocked;
-	resources[4].gatherable = jobs[3].unlocked;
-	resources[5].gatherable = jobs[2].unlocked;
-	resources[6].gatherable = jobs[5].unlocked;
-	
-	
-
+	//setPerTick();
 	
 	var affordable = function (building) {
 		if (debug_on) console.log("Checking affordability of " + building);
