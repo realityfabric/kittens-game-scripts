@@ -308,15 +308,19 @@ var numAffordable = function (building) {
 
 var balance = function() {
 	if (gamePage.isPaused) { return;}
+	
 	var kittens = gamePage.village.getKittens();
 	var freeKittens = kittens; //later in the function this will be modified
 	var craftRatio = 1 + gamePage.bld.effectsCached.craftRatio;
 	var huntRatio = 1;
 	
 	var upgrades = gamePage.workshop.upgrades;
+	var availableUpgrades  = [];
 	
 	for (var i = 0; i < upgrades.length; i++) {
 		if (upgrades[i].researched) {
+			availableUpgrades.push(upgrades[i]);
+			
 			if (upgrades[i].name == "bolas") {
 				huntRatio += 1;
 			}
@@ -332,14 +336,6 @@ var balance = function() {
 			else if (upgrades[i].name == "nanosuits") {
 				huntRatio += 0.5;
 			}
-		}
-	}
-	
-	var availableUpgrades  = [];
-	
-	for (var i = 0; i < upgrades.length; i++) {
-		if (upgrades[i].unlocked && !upgrades[i].researched) {
-			availableUpgrades.push(upgrades[i]);
 		}
 	}
 	
