@@ -845,45 +845,51 @@ var build = function () {
 	}
 	
 	var craftUp = function (resource) {
-		if (resource == "catnip" || resource == "wood"||resource == "minerals" ||resource == "iron" ||resource == "coal" ||resource == "titanium" ||resource == "gold" ||resource == "oil" ||resource == "faith" ||resource == "science" ||resource == "manpower" ||resource == "culture" ||resource == "starchart" ||resource == "furs" ||resource == "ivory" ||resource == "spice"){return;} 
 		if (gamePage.workshop.getCraft(resource).unlocked == false) { return; }
-		else if (resource == "beam" ||resource == "slab" ||resource == "plate" ||resource == "steel" || resource == "parchment") { 
-			gamePage.craftAll(resource);
-		}
-		else if (resource == "alloy") {
-			gamePage.craftAll(resource);
-			craftUp("steel");
-		}
-		else if (resource == "gear") {
-			gamePage.craftAll(resource);
-			craftUp("steel");
-		}
-		else if (resource == "scaffold") {
-			gamePage.craftAll(resource);
-			craftUp("beam");
-		}
-		else if (resource == "concrate") {
-			gamePage.craftAll(resource);
-			craftUp ("slab");
-			craftUp ("steel");
-		}
-		else if (resource == "megalith") {
-			gamePage.craftAll(resource);
-			craftUp("beam");
-			craftUp("slab");
-			craftUp("plate");
-		}
-		else if (resource == "manuscript") {
-			gamePage.craftAll(resource);
-			craftUp('parchment');
-		}
-		else if (resource == "compedium") {
-			gamePage.craftAll(resource);
-			craftUp('manuscript');
-		}
-		else if (resource == 'blueprint') {
-			gamePage.craftAll(resource);
-			craftUp('compedium');
+		
+		switch (resource) {
+			case "beam":
+			case "slab":
+			case "plate":
+			case "steel":
+			case "parchment":
+				gamePage.craftAll(resource);
+				break;
+			case "alloy":
+			case "gear":
+				gamePage.craftAll(resource);
+				craftUp("steel");
+				break;
+			case "scaffold":
+				gamePage.craftAll(resource);
+				craftUp("beam");
+				break;
+			case "concrate":
+				gamePage.craftAll(resource);
+				craftUp("slab");
+				craftUp("steel");
+				break;
+			case "megalith":
+				gamePage.craftAll(resource);
+				craftUp("beam");
+				craftUp("slab");
+				craftUp("plate");
+				break;
+			case "manuscript":
+				gamePage.craftAll(resource);
+				craftUp("parchment");
+				break;
+			case "compedium":
+				gamePage.craftAll(resource);
+				craftUp("manuscript");
+				break;
+			case "blueprint":
+				gamePage.craftAll(resource);
+				craftUp('compedium');
+				break;
+			default:
+				return; //if (resource == "catnip" || resource == "wood"||resource == "minerals" ||resource == "iron" ||resource == "coal" ||resource == "titanium" ||resource == "gold" ||resource == "oil" ||resource == "faith" ||resource == "science" ||resource == "manpower" ||resource == "culture" ||resource == "starchart" ||resource == "furs" ||resource == "ivory" ||resource == "spice"){return;} 
+				break;
 		}
 	}
 	
@@ -898,6 +904,7 @@ var build = function () {
 		for (var c_index = 0; c_index < cost.length; c_index++) {
 			if (cost[c_index].val > gamePage.resPool.get(cost[c_index].name).value) {
 				canBuy = false;
+				break;
 			}
 		}
 		
@@ -912,8 +919,8 @@ var build = function () {
 						craftUp(cost[i].name);	
 				}
 			}	
-			var btnstr = ""; //https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
-			btnstr = ".btnContent:contains('" + availableUpgrades[i].title + "')";
+			
+			var btnstr = ".btnContent:contains('" + availableUpgrades[i].title + "')"; //https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
 			$(btnstr).click();
 		}
 	}
