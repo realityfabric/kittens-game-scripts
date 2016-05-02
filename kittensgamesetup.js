@@ -1030,11 +1030,11 @@ var ticksToGoal = function (resource, goal) {
     var res = gamePage.resPool.get(resource);
 
     if (res.value > goal) {
-        /*if (res.perTickUI < 0) {
+        if (res.perTickUI < 0) {
             return (goal - res.value) / res.perTickUI;
         } else {
             return Infinity;
-        }*/
+        }
         return 0;
     } else {
         if (res.perTickUI > 0) {
