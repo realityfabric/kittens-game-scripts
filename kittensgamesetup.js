@@ -1,23 +1,33 @@
 var debug_on = false; // set to true to enable console logs
 
-var blueprint = gamePage.resPool.get('blueprint');
-var coal = gamePage.resPool.get('coal');
-var compendium = gamePage.resPool.get('compedium');
+//base resources
 var catnip = gamePage.resPool.get('catnip');
-var gold = gamePage.resPool.get('gold');
-var iron = gamePage.resPool.get('iron');
-var ivory = gamePage.resPool.get('ivory');
+var wood = gamePage.resPool.get('wood');
+var science = gamePage.resPool.get('science');
 var catpower = gamePage.resPool.get('manpower');
+var minerals = gamePage.resPool.get('minerals');
+
+var iron = gamePage.resPool.get('iron');
+var gold = gamePage.resPool.get('gold');
+var coal = gamePage.resPool.get('coal');
+var titanium = gamePage.resPool.get('titanium');
+
 var culture = gamePage.resPool.get('culture');
 var faith = gamePage.resPool.get('faith');
+
+//luxury resources
 var furs = gamePage.resPool.get('furs');
+var ivory = gamePage.resPool.get('ivory');
+
+//books
+var parchment = gamePage.resPool.get('parchment');
 var manuscript = gamePage.resPool.get('manuscript');
-var minerals = gamePage.resPool.get('minerals');
+var compendium = gamePage.resPool.get('compedium');
+var blueprint = gamePage.resPool.get('blueprint');
+
+//misc
 var oil = gamePage.resPool.get('oil');
-var science = gamePage.resPool.get('science');
 var tanker = gamePage.resPool.get('tanker');
-var titanium = gamePage.resPool.get('titanium');
-var wood = gamePage.resPool.get('wood');
 
 var buildpriority = undefined;
 
