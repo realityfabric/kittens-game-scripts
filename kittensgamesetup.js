@@ -326,6 +326,28 @@ var numAffordable = function (building) {
 	return more;
 }
 
+var taskManager = function () {
+	var jobs = gamePage.village.jobs;
+    if (science.value == science.maxValue && jobs[2].value > 0) {
+		var jobs_temp = [];
+		for (var i = 0; i < jobs.length; i++) {
+			jobs_temp.push(jobs[i].value);
+		}
+		
+		//switch all scholars to be farmers
+		jobs_temp[1] += jobs_temp[2];
+		jobs_temp[2] = 0;
+		
+		gamePage.village.clearJobs();
+		
+		for (var i = 0; i < jobs_temp.length; i++) {
+			for (var j = 0; j < jobs_temp[i]; j++) {
+				gamePage.village.assignJob(jobs[i]);
+			}
+		}
+    }
+}
+
 var balance = function() {
 	if (gamePage.isPaused) { return;}
 	
