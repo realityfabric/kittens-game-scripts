@@ -1,5 +1,24 @@
 var debug_on = false; // set to true to enable console logs
 
+var blueprint = gamePage.resPool.get('blueprint');
+var coal = gamePage.resPool.get('coal');
+var compendium = gamePage.resPool.get('compedium');
+var catnip = gamePage.resPool.get('catnip');
+var gold = gamePage.resPool.get('gold');
+var iron = gamePage.resPool.get('iron');
+var ivory = gamePage.resPool.get('ivory');
+var catpower = gamePage.resPool.get('manpower');
+var culture = gamePage.resPool.get('culture');
+var faith = gamePage.resPool.get('faith');
+var furs = gamePage.resPool.get('furs');
+var manuscript = gamePage.resPool.get('manuscript');
+var minerals = gamePage.resPool.get('minerals');
+var oil = gamePage.resPool.get('oil');
+var science = gamePage.resPool.get('science');
+var tanker = gamePage.resPool.get('tanker');
+var titanium = gamePage.resPool.get('titanium');
+var wood = gamePage.resPool.get('wood');
+
 var buildpriority = undefined;
 
 var parchmentMin = 1000;
@@ -139,7 +158,6 @@ var trade = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
 autoPray = setInterval(function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
     var origTab = gamePage.activeTabId;
-    var faith = gamePage.resPool.get('faith');
 
     if (faith.value / faith.maxValue > 0.95) {
         gamePage.activeTabId = 'Religion'; gamePage.render();
@@ -152,7 +170,7 @@ starClick = setInterval(function() { $("#gameLog").find("input").click(); }, 2 *
 
 var craftCatnip = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
-    var catnip = gamePage.resPool.get('catnip');
+	
     var calendar = gamePage.calendar;
 
     //run only if not losing stock
@@ -212,7 +230,6 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
 
 var hunt = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
-    var catpower = gamePage.resPool.get('manpower');
     
     if (catpower.value / catpower.maxValue > 0.95) {
         $("a:contains('Send hunters')").click();
@@ -221,14 +238,7 @@ var hunt = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a
 
 var books = function () { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
-	var catpower = gamePage.resPool.get('manpower');
-	var culture = gamePage.resPool.get('culture');
-	var science = gamePage.resPool.get('science');
-	var furs = gamePage.resPool.get('furs');
-	var parchment = gamePage.resPool.get('parchment');
-	var manuscript = gamePage.resPool.get('manuscript');
-	var compendium = gamePage.resPool.get('compedium');
-	var blueprint = gamePage.resPool.get('blueprint');
+	
 	if (gamePage.workshop.getCraft('parchment').unlocked){ 
 		gamePage.craftAll('parchment');
 	}
@@ -309,18 +319,7 @@ var numAffordable = function (building) {
 var balance = function() {
 	if (gamePage.isPaused) { return;}
 	
-	var catnip = gamePage.resPool.get('catnip');
-	var wood = gamePage.resPool.get('wood');
-	var minerals = gamePage.resPool.get('minerals');
-	var coal = gamePage.resPool.get('coal');
-	var catpower = gamePage.resPool.get('manpower');
-	var science = gamePage.resPool.get('science');
-	var faith = gamePage.resPool.get('faith');
-	var iron = gamePage.resPool.get('iron');
-	var titanium = gamePage.resPool.get('titanium');
-	var gold = gamePage.resPool.get('gold');
-	var oil = gamePage.resPool.get('oil');
-	var ivory = gamePage.resPool.get('ivory');
+	
 	
 	var kittens = gamePage.village.getKittens();
 	var freeKittens = kittens; //later in the function this will be modified
@@ -651,10 +650,10 @@ var balance = function() {
 		}
 	}
 	
-	var oilcap = gamePage.resPool.get('oil').maxValue;
+	var oilcap = oil.maxValue;
 	convertCost({name: 'tanker', val: ((45000 - oilcap) / 500)});
 	
-	if (gamePage.resPool.get('tanker').val < 25) {
+	if (tanker.val < 25) {
 		gamePage.craftAll('tanker');
 	}
 	
@@ -676,7 +675,7 @@ var balance = function() {
 	}
 		
 		//feeding the populace
-		var catnipDemand = gamePage.resPool.get('catnip').maxValue * .95;
+		var catnipDemand = catnip.maxValue * .95;
 		convertCost({name: 'catnip', val: catnipDemand});
 		
 		
@@ -763,12 +762,6 @@ var balance = function() {
 
 var build = function () {
 	if (gamePage.isPaused) { return; }
-	var oil = gamePage.resPool.get('oil');
-	var wood = gamePage.resPool.get('wood');
-	var minerals = gamePage.resPool.get('minerals');
-	var gold = gamePage.resPool.get('gold');
-	var catpower = gamePage.resPool.get('manpower');
-	var iron = gamePage.resPool.get('iron');
 	
 	var buildings = gamePage.bld.meta[0].meta;
 	
