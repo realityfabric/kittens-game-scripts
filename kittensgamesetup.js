@@ -6,7 +6,7 @@ var parchmentMin = 1000;
 var manuscriptMin = 500;
 var compediumMin = 250;
 
-var timer = 600;
+var timer = 30000;
 
 var maxTit = true;
 var maxIron = true;
