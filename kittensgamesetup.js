@@ -150,25 +150,13 @@ autoPray = setInterval(function() { //https://www.reddit.com/r/kittensgame/comme
 
 starClick = setInterval(function() { $("#gameLog").find("input").click(); }, 2 * 1000); //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 
-var craftCatnip = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
-	if (gamePage.isPaused) { return; }
-    var catnip = gamePage.resPool.get('catnip');
-    var calendar = gamePage.calendar;
-
-    //run only if not losing stock
-    //run only if near max
-    //converts 9.9% of stock to wood
-    if (catnip.perTickUI < 0) { return; }
-    if (catnip.value / catnip.maxValue < 0.999) { return; }  
-    gamePage.craft('wood', catnip.maxValue * 0.01 / 50);
-}
-
 var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 	if (gamePage.isPaused) { return; }
 	
 	if (debug_on) console.log ("craft()");
 	
     var resources = [
+        ["catnip",   "wood"],
         ["wood",     "beam" ],
         ["minerals", "slab" ],
         ["coal",     "steel"],
@@ -198,7 +186,7 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
 
     for (var i = 0; i < resources.length; i++) {
         var curRes = gamePage.resPool.get(resources[i][0]);
-        if (curRes.value / curRes.maxValue > 0.999
+        if (curRes.value / curRes.maxValue > 0.9
          && gamePage.workshop.getCraft(resources[i][1]).unlocked
          && affordable(resources[i][1])) {
             gamePage.craft(resources[i][1], 1);
