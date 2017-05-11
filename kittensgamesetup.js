@@ -221,17 +221,17 @@ var books = function () { //https://www.reddit.com/r/kittensgame/comments/2eqlt5
 		gamePage.craftAll('parchment');
 	}
 	if (gamePage.workshop.getCraft('manuscript').unlocked) { 
-		if (parchment.value > 10025 && culture.value > 400) {
+		if (parchment.value > 10025 && culture.value > (culture.maxValue * .9)) {
 			gamePage.craft('manuscript', 1);
 		} // gamePage.craftAll('manuscript');
 	}
 	if (gamePage.workshop.getCraft('compedium').unlocked) {
-		if (manuscript.value > 5050 && science.value > 10000) {
+		if (manuscript.value > 5050 && science.value > (science.maxValue * .9)) {
 			gamePage.craft('compedium', 1);
 		} // gamePage.craftAll('compedium');
 	}
 	if (gamePage.workshop.getCraft('blueprint').unlocked) {
-		if (compendium.value > 2575 && science.value > 25000)  {
+		if (compendium.value > 2575 && science.value > (science.maxValue * .9))  {
 			gamePage.craft('blueprint', 1);
 		}// gamePage.craftAll('blueprint');
 	}
