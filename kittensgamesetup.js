@@ -136,14 +136,14 @@ var trade = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
 	
 }
 
-autoPray = setInterval(function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
+var pray = function () {
 	if (gamePage.isPaused) { return; }
     var faith = gamePage.resPool.get('faith');
 
     if (faith.value / faith.maxValue > 0.95) {
         $("a:contains('Praise the sun!')").click();
 	}
-}, 10 * 1000);
+}
 
 starClick = setInterval(function() { $("#gameLog").find("input").click(); }, 2 * 1000); //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
 
