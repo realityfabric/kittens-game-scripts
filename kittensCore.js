@@ -1,3 +1,7 @@
+var buttonClick = function (buttonText) {
+    $("a:contains('" + buttonText + "')").click();
+}
+
 var pray = function () {
 	if (gamePage.isPaused) { return; }
     var faith = gamePage.resPool.get('faith');
