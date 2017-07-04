@@ -1,4 +1,4 @@
-var buttonClick = function (buttonText) {
+var linkClick = function (buttonText) {
     $("a:contains('" + buttonText + "')").click();
 }
 
@@ -7,7 +7,7 @@ var pray = function () {
     var faith = gamePage.resPool.get('faith');
 
     if (faith.value / faith.maxValue > 0.95) {
-        $("a:contains('Praise the sun!')").click();
+        linkClick("Praise the sun!");
 	}
 }
 
@@ -65,7 +65,7 @@ var hunt = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a
     var catpower = gamePage.resPool.get('manpower');
 
     if (catpower.value / catpower.maxValue > 0.95) {
-        $("a:contains('Send hunters')").click();
+        linkClick("Send hunters");
 	}
 }
 
