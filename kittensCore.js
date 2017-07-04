@@ -1,3 +1,7 @@
+var buttonClick = function (buttonText) { //https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
+    $(".btnContent:contains('" + buttonText + "')").click();
+}
+
 var linkClick = function (buttonText) {
     $("a:contains('" + buttonText + "')").click();
 }
