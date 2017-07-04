@@ -805,9 +805,7 @@ var build = function () {
 						craftUp(cost[i].name);	
 				}
 			}	
-			var btnstr = ""; //https://www.reddit.com/r/kittensgame/comments/2jjee9/script_to_auto_build_buildings/clcc5mt
-			btnstr = ".btnContent:contains('" + availableUpgrades[i].title + "')";
-			$(btnstr).click();
+			buttonClick(availableUpgrades[i].title);
 		}
 	}
 	
@@ -849,13 +847,11 @@ var build = function () {
 							gamePage.render();
 						}
 						
-						var btnstr = "";
 						if (building.stages != undefined) {
-							btnstr = ".btnContent:contains('" + building.stages[building.stage].label + "')";
+                            buttonClick(building.stages[building.stage].label;
 						} else {
-							btnstr = ".btnContent:contains('" + building.label + "')";
+							buttonClick(building.label);
 						}
-						$(btnstr).click();
 						
 						if (building.name == "calciner" && (oil.perTickUI < (1/5) || minerals.perTickUI < (30/5))) {
 							if (building.on > 0) {
