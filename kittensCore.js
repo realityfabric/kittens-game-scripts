@@ -15,6 +15,10 @@ var pray = function () {
     }
 }
 
+var starClick = function() {
+    $("#observeBtn").click();
+}
+
 var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/a_few_kittens_game_scripts_ive_put_together/
     if (gamePage.isPaused) { return; }
 
