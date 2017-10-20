@@ -26,7 +26,8 @@ var craft = function() { //https://www.reddit.com/r/kittensgame/comments/2eqlt5/
         ["minerals", "slab" ],
         ["coal",     "steel"],
         ["iron",     "plate"],
-        ["titanium", "alloy"]
+        ["titanium", "alloy"],
+        ["oil",      "kerosene"]
     ];
 
     var affordable = function (craft) {
